@@ -7,7 +7,13 @@ var bot = new Discord.Client({
 });
 
 
-
+function countdown_func (i, channelID)
+{ 
+            bot.sendMessage({
+              to: channelID,
+              message: "T minus " + i
+            })
+}
 var rps_array = ["rock", "paper", "scissors"];
 var getRandomInt = function(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -82,5 +88,20 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         	message: rps_array[result] + ", " + rps(2, result)
         });
         break;
-    }} 
-});
+      case "countdown1":
+        for(var i = 3; i >= 0; i--) {
+         
+           setTimeout(countdown_func, 500*(3-i),i,channelID); 
+        }
+
+        setTimeout(function(){
+            bot.sendMessage({
+              to: channelID,
+              message: "hallo"
+            })
+        }, 2000);
+      
+      break;
+  } 
+  }
+})
